@@ -1,0 +1,295 @@
+
+// Defines questions multiple answers and the correct answer//
+
+var questions = [{
+
+    question: "How do you assign a variable in ye olde' JavaScript?",
+    choices: ["a. var (variableName)", "b. var variableName", "c. var = variableName", "d. variableName =" ],
+    answer: "b. var variableName"
+},
+
+{
+    question: "Which HTML element summons the demon known as Java Script?",
+    choices: ["a. <header> ", "b. <p>", "c. <script>", "d.<h1>"],
+    answer: "c. <script>"
+},
+
+{
+    question: "Wich data type is 'Six Hundred Twenty'?",
+    choices: ["a. number", "b. boolean", "c. null", "d. string"],
+    answer: "d. string"
+},
+
+{
+    question: "In 'console.log(this)' 'this' is referring to what confusing JS abstraction?",
+    choices: ["a. the window", "b. a cute cat", "c. the css", "d. the word 'this'"],
+    answer: "a. the window"
+},
+
+{
+    question: "What is the 'Unshift' Method?",
+    choices: ["a. adds an object to the end of an array", "b. changes casing", "c. adds an object to the beginning of an array", "d. deletes an array"],
+    answer: "c. adds an object to the beginning of an array"
+},
+
+{
+    question: "What is a function in Javascript",
+    choices: ["a. a reuseable line of code that preforms a specified task", "b. an ordered list", "c. a set of values ", "d. not neccessary"],
+    answer: "a. a reuseable line of code that preforms a specified task"
+},
+
+{
+    question: "What does JavaScript do for your code?",
+    choices: ["a. makes it look pretty", "b. adds functionality", "c. provides a basic structure", "d. all of the above"],
+    answer: "b. adds functionality"
+},
+
+{
+    question: "Which would be the first object in an array?",
+    choices: ["a. 0", "b. 1", "c. first", "d. none of the above"],
+    answer: "a. 0"
+}
+];
+
+//Defining variables for HTML elements
+
+//Time Elements
+var timer = document.getElementById('timer');
+var timeLeft = document.getElementById("time-left");
+var timesUp = document.getElementById("times-up")
+
+//Start Button
+var startDiv = document.getElementById('start');
+var startBtn = document.getElementById('start-btn');
+
+//Question element
+var questionsDiv = document.getElementById('questions');
+var questionTxt = document.getElementById('question-txt');
+var choicesDiv = document.getElementById('choices');
+var choiceA = document.getElementById('btn1');
+var choiceB = document.getElementById('btn2');
+var choiceC = document.getElementById('btn3');
+var choiceD = document.getElementById('btn4');
+var answerCheck = document.getElementById('correct-answer');
+
+//Summary element
+var summary = document.getElementById('summary');
+var submitInitialBtn = document.getElementById('submit-initials-btn');
+var initialInput = document.getElementById('initials');
+
+var scoresDiv =document.getElementById('scores');
+var reset = document.getElementById('reset-btn');
+var clearHighScores = document.getElementById('clear-score-btn');
+var highScore = document.getElementById('high-scores');
+var highScoresList = document.getElementById('high-score-list');
+var finalScore = document.getElementById("finalScore");
+
+
+var correctAns = 0;
+var questionNum = 0;
+var scoreResult;
+var questionIndex = 0;
+
+//Function to start timer and show quiz on button press
+
+var totalTime = 60;
+function newQuiz() {
+questionIndex = 0;
+totalTime = 60;
+timeLeft.textContent = totalTime;
+
+
+
+startDiv.style.display = "none";
+questionsDiv.style.display = "block";
+choicesDiv.style.display = "block";
+timer.style.display = "block";
+timesUp.style.display = "none";
+summary.style.display = "none";
+
+
+
+var startTimer = setInterval(function() {
+    totalTime --;
+    timeLeft.textContent = totalTime;
+    if(totalTime <= 0) {
+        clearInterval(startTimer);
+        gameOver();
+        if (questionIndex < questions.length - 1){
+            gameOver();
+        }
+    }
+},1000);
+
+showQuiz();
+
+};
+
+
+//Show Questions and choices when quiz starts
+
+function showQuiz() {
+    nextQuestion();
+}
+
+function nextQuestion(){
+    questionTxt.textContent = questions[questionIndex].question;
+    choiceA.textContent = questions[questionIndex].choices[0];
+    choiceB.textContent = questions[questionIndex].choices[1];
+    choiceC.textContent = questions[questionIndex].choices[2];
+    choiceD.textContent = questions[questionIndex].choices[3];
+
+   
+    
+}
+
+
+//Shows correct answer after player has made their choice
+
+function checkAnswer(answer){   
+    var lineBreak = document.getElementById("lineBreak");
+    lineBreak.style.display ="block";
+    answerCheck.style.display ="block";
+   
+    if(questions[questionIndex].answer === questions[questionIndex].choices[answer]){
+
+        
+        //Add to score if correct answer
+        correctAns++;
+        answerCheck.textContent = "Correct!";
+
+        //If wrong answer
+    }  else {
+        totalTime -= 5;
+        timeLeft.textContent = totalTime;
+        answerCheck.textContent = 'Wrong! The correct answer was: ' + questions[questionIndex].answer;
+    }
+
+    questionIndex++;
+
+    if(questionIndex === questions.length){
+        gameOver();
+    }else{
+        nextQuestion();
+    }
+};
+
+
+//Ends the quiz if all questions are answered
+if (questionIndex < questions.length) {
+    nextQuestion();
+} else {
+
+    gameOver();
+}
+
+function chooseA() { checkAnswer(0);}
+
+function chooseB() { checkAnswer(1);}
+
+function chooseC() { checkAnswer(2);}
+
+function chooseD() { checkAnswer(3);}
+
+//When timer gets to 0 or all questions answered, bring up game over
+
+function gameOver() {
+    summary.style.display ='block';
+    questionsDiv.style.display = 'none';
+    startDiv.style.display = 'none';
+    timer.style.display = 'none';
+    timesUp.style.display = 'block';
+
+//Shows final player score
+
+finalScore.textContent =correctAns;
+
+}
+
+//Enter initials for high scores and save in local storage
+function storeHighScore (event) {
+    event.preventDefault();
+
+    startDiv.style.display = 'none';
+    timer.style.display = 'none';
+    timesUp.style.display = 'none';
+    summary.style.display = 'block';
+    highScoresList.style.display = 'block';
+
+    
+    var savedHighScores = localStorage.getItem("high scores");
+    var scoresArray;
+
+    if (savedHighScores === null){
+        scoresArray = [];
+    } else {
+        scoresArray = JSON.parse(savedHighScores)
+    }
+
+    var userScore = {
+        initials: initialInput.value,
+        scores: finalScore.textContent
+    };
+
+    console.log(userScore);
+    scoresArray.push(userScore);
+
+    var scoresArrayString = JSON.stringify(scoresArray);
+    window.localStorage.setItem("high scores", scoresArrayString);
+
+    showHighScores();
+}
+
+//Shows high scores
+var i =0;
+function showHighScores(){
+    startDiv.style.display ='none';
+    timer.style.display = 'none';
+    questionsDiv.style.display = 'none';
+    timesUp.style.display = 'none';
+    summary.style.display = 'block';
+    highScoresList.style.display = 'block';
+
+    var savedHighScores = localStorage.getItem("high scores");
+
+    if (savedHighScores === null){
+        return;
+    }
+
+    console.log(savedHighScores);
+
+    var storedHighScores = JSON.parse(savedHighScores);
+
+    for (; i < storedHighScores.length; i++) {
+        var newScore = document.createElement('p');
+        newScore.innerHTML = storedHighScores[i].initials + ":" + storedHighScores[i].score;
+        highScoresList.appendChild(newScore);
+    }
+}
+
+//Event Listeners
+startBtn.addEventListener("click", newQuiz);
+choiceA.addEventListener("click", chooseA);
+choiceB.addEventListener("click", chooseB);
+choiceC.addEventListener("click", chooseC);
+choiceD.addEventListener("click", chooseD);
+
+submitInitialBtn.addEventListener("click", function(event){
+    storeHighScore(event);
+});
+
+reset.addEventListener("click", function(){
+    startDiv.style.display = "block";
+    highScoresList.style.display = "none";
+    summary.style.display = "none";
+
+});
+
+clearHighScores.addEventListener("click", function(){
+    window.localStorage.removeItem("high scores")
+
+});
+
+
+
+
