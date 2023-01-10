@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Timed Quiz</title>
+    <link rel="stylesheet" href="./assets/CSS/style.css">
+  </head>
+
+<!-- INSTRUCTIONS AND START BUTTON -->
+  <body>
+    <main>
+      <div class="quiz-title" >
+        <header>
+          <div class="title">
+            <h1>Code Quiz!</h1>
+            <p id="instructions">Hi there! You have 60 seconds to answer each question and rack up points! However, incorrect answer REMOVES a point from your score AS WELL AS 5 seconds from your timer!</p>
+            <div  id="start">
+              <button id="start-btn">Start Quiz</button>
+            </div>
+          </div>
+
+<!-- QUESTIONS SECTION -->
+
+          <div class="questions" id="questions" style="display: none;">
+            <p id="question-txt"></p>
+          <div id="choices">
+            <p> <button id="btn1"></button></p>
+            <p> <button id="btn2"></button></p>
+            <p> <button id="btn3"></button></p>
+            <p> <button id="btn4"></button></p>
+          </div>
+            <hr id="lineBreak">
+            <p id="correct-answer"></p>
+          </div>
+
+<!-- TIMER SECTION -->
+
+          <div class="timer" id="timer">
+            <div class="seconds">Time: </div>
+            <div class="time-left" id="time-left"></div>
+            
+          </div>
+          <div id="times-up" style="display: none;">Time's Up!</div>
+        </header>
+
+      </div>
+
+<!-- YOUR SCORES -->
+
+      <div id="summary">
+      <div class="scores">
+        <h2>You Scored <span id="finalScore"></span></h2>
+        <form>
+          <p> Enter your initials: <input id="initials" type="text">
+          <button type="submit" id="submit-initials-btn">Submit</button>
+          </p>
+        </form>
+      </div>
+
+<!-- HIGH SCORES -->
+
+      <div id="high-scores">
+        <h2>High Scores!</h2>
+        <div id="high-score-list"></div>
+
+        <p>
+          <button type="submit" id="reset-btn">Reset</button>
+          <button type="submit" id="clear-score-btn">Clear Score Board</button>
+        </p>
+      </div>
+      </div>
+    </main>
+
+
+	<script src="assets/js/script.js"></script>
+  </body>
+</html>
