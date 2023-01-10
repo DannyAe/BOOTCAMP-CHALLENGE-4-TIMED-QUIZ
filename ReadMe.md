@@ -1,6 +1,6 @@
 <h1>CHALLENGE 04 JS / Timed JS Quiz</h1>
 <b>Project Description: 
-Create a timed JS Quiz with multiple answers. When the right answer is provided the program stacks up points and keeps the timer going, when the wrong answer is given, the program removes time and points. there is also a score board that saves information</b>
+Create a timed JS Quiz with multiple answers. When the right answer is provided the program stacks up points and keeps the timer going, when the wrong answer is given, the program removes time and points. there is also a score board that saves your high scores!</b>
 <br><Br>
 <Br>
 <a href="https://dannyae.github.io/Timed-JavaScript-Quiz/">Deployed Pages</a><BR>
@@ -11,4 +11,4 @@ Create a timed JS Quiz with multiple answers. When the right answer is provided 
   
 Project Screenshot
   
-<img src="www.html.am/images/html-codes/links/boracay-white-beach-sunset-300x225.jpg" width="650" alt="Screenshot of project"/></a>
+<img src="https://github.com/DannyAe/Timed-JavaScript-Quiz/blob/main/assets/screenshot.png" width="650" alt="Screenshot of project"/></a>
